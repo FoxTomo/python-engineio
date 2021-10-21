@@ -92,7 +92,7 @@ class RedisDict(dict):
     def __get_values(self, with_keys=False, clear_namespace=False):
         keys = self.keys()
         values = []
-        exception_class = type("ValueNotExists", (object, Exception), {})()
+        exception_class = type("ValueNotExists", (Exception, ), {})()
         for key in keys:
             value = self.get(key, exception_class)
             if value is exception_class:
