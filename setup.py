@@ -31,6 +31,7 @@ setup(
     platforms='any',
     install_requires=[
         'six>=1.9.0',
+        'redis'
     ],
     extras_require={
         'client': [
@@ -39,7 +40,7 @@ setup(
         ],
         'asyncio_client': [
             'aiohttp>=3.4',
-        ]
+        ],
     },
     tests_require=[
         'mock',

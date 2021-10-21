@@ -11,6 +11,7 @@ from . import exceptions
 from . import packet
 from . import payload
 from . import socket
+from .custom_types import RedisDict
 
 default_logger = logging.getLogger('engineio.server')
 
@@ -107,7 +108,11 @@ class Server(object):
         self.cors_allowed_origins = cors_allowed_origins
         self.cors_credentials = cors_credentials
         self.async_handlers = async_handlers
-        self.sockets = {}
+        redis_host = kwargs.get("redis_host")
+        if redis_host:
+            self.sockets = RedisDict(redis_host, kwargs.get("redis_port"), "engineio")
+        else:
+            self.sockets = {}
         self.handlers = {}
         self.log_message_keys = set()
         self.start_service_task = monitor_clients \
